@@ -11,8 +11,13 @@ from sqlalchemy.orm import DeclarativeBase
 
 from app.core.config import settings
 
+from sqlalchemy.engine import make_url
+
+db_url = make_url(settings.DATABASE_URL)
+print("Database driver:", db_url.drivername)
+
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    db_url,
     echo=settings.DEBUG,
     pool_size=20,
     max_overflow=10,
