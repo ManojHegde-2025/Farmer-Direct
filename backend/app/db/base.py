@@ -17,7 +17,7 @@ db_url = make_url(settings.DATABASE_URL)
 print("Database driver:", db_url.drivername)
 
 engine = create_async_engine(
-    db_url,
+    settings.DATABASE_URL,
     echo=settings.DEBUG,
     pool_size=20,
     max_overflow=10,
