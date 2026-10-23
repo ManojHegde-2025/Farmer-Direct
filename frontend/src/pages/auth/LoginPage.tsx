@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { api } from '../../services/api';
-import { Sprout, LogIn, AlertCircle } from 'lucide-react';
+import { Sprout, Building2, ShieldCheck, LogIn, AlertCircle } from 'lucide-react';
+
+type RoleType = 'FARMER' | 'BUYER' | 'ADMIN';
+
+interface RoleOption {
+  id: RoleType;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const ROLES: RoleOption[] = [
+  { id: 'FARMER', label: 'Farmer', icon: Sprout },
+  { id: 'BUYER', label: 'Buyer', icon: Building2 },
+  { id: 'ADMIN', label: 'Admin', icon: ShieldCheck },
+];
 
 export const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
+  const initialRoleParam = searchParams.get('role')?.toUpperCase();
+  const defaultRole: RoleType =
+    initialRoleParam === 'BUYER' ? 'BUYER' : initialRoleParam === 'ADMIN' ? 'ADMIN' : 'FARMER';
+
+  const [selectedRole, setSelectedRole] = useState<RoleType>(defaultRole);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-  // Quick helper accounts for demo testing
-  const fillDemoAccount = (demoEmail: string, demoPw: string) => {
-    setEmail(demoEmail);
-    setPassword(demoPw);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,74 +86,89 @@ export const LoginPage: React.FC = () => {
             </div>
           )}
 
+          {/* Role Selection Buttons */}
+          <div className="mb-6">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+              Select Role
+            </label>
+            <div
+              className="grid grid-cols-3 gap-2 sm:gap-3"
+              role="radiogroup"
+              aria-label="Select Account Role"
+            >
+              {ROLES.map((role) => {
+                const Icon = role.icon;
+                const isSelected = selectedRole === role.id;
+                return (
+                  <button
+                    key={role.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={isSelected}
+                    onClick={() => setSelectedRole(role.id)}
+                    className={`group flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 px-2 sm:px-3 rounded-xl border text-xs sm:text-sm transition-all duration-200 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+                      isSelected
+                        ? 'bg-emerald-600 border-emerald-600 text-white font-semibold shadow-sm hover:bg-emerald-700'
+                        : 'bg-slate-50 border-slate-200 text-slate-700 font-medium hover:bg-slate-100 hover:border-slate-300 hover:text-slate-900'
+                    }`}
+                  >
+                    <Icon
+                      className={`w-4 h-4 shrink-0 transition-colors ${
+                        isSelected ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                      }`}
+                    />
+                    <span className="truncate">{role.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Email Address</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                Email Address
+              </label>
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Password</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                Password
+              </label>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="mt-1 block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center items-center space-x-2 py-3 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 shadow-sm transition disabled:opacity-50"
+              className="w-full flex justify-center items-center space-x-2 py-3 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 shadow-sm transition disabled:opacity-50 cursor-pointer"
             >
               <LogIn className="w-4 h-4" />
               <span>{loading ? 'Authenticating...' : 'Sign In'}</span>
             </button>
           </form>
 
-          {/* Quick Seed Demo Logins */}
-          <div className="mt-6 pt-6 border-t border-slate-200">
-            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
-              Demo Quick-Fill Accounts:
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => fillDemoAccount('mahabaleshwara.bhat@agri.in', 'Farmer@123456')}
-                className="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-lg border border-slate-200 font-medium transition"
-              >
-                🌾 Farmer (Bhat)
-              </button>
-              <button
-                type="button"
-                onClick={() => fillDemoAccount('procurement@mangalorespices.com', 'Buyer@123456')}
-                className="text-[11px] bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-lg border border-slate-200 font-medium transition"
-              >
-                🏢 Buyer (Spices)
-              </button>
-              <button
-                type="button"
-                onClick={() => fillDemoAccount('admin@farmerdirect.kar.gov.in', 'Admin@FarmerDirect2026')}
-                className="text-[11px] bg-amber-50 hover:bg-amber-100 text-amber-800 p-2 rounded-lg border border-amber-200 font-medium transition"
-              >
-                🛡️ Admin
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-6 text-center text-xs text-slate-600">
+          <div className="mt-6 pt-6 border-t border-slate-200 text-center text-xs text-slate-600">
             Don't have an account?{' '}
-            <Link to="/register" className="font-semibold text-emerald-600 hover:text-emerald-500">
+            <Link
+              to={`/register${selectedRole === 'BUYER' ? '?role=buyer' : selectedRole === 'FARMER' ? '?role=farmer' : ''}`}
+              className="font-semibold text-emerald-600 hover:text-emerald-500 transition-colors"
+            >
               Create an account
             </Link>
           </div>
