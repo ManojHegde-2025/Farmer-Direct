@@ -20,7 +20,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-xl tracking-tight text-white">FarmerDirect</span>
+                <span className="font-bold text-xl tracking-tight text-white">Rajya Krishi Banda</span>
                 <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-1.5 py-0.5 rounded border border-emerald-500/30">
                   Udupi & DK
                 </span>

@@ -69,7 +69,7 @@ export const LoginPage: React.FC = () => {
           <div className="bg-emerald-600 p-2 rounded-xl text-white">
             <Sprout className="w-6 h-6" />
           </div>
-          <span>FarmerDirect</span>
+          <span>Rajya Krishi Banda</span>
         </Link>
         <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900">Sign in to your account</h2>
         <p className="mt-1 text-xs text-slate-500">

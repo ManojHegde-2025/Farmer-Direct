@@ -113,7 +113,7 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-xs uppercase tracking-wider font-semibold text-emerald-600">Fair & Transparent</h2>
-            <p className="text-3xl font-extrabold text-slate-900 mt-1">How FarmerDirect Works</p>
+            <p className="text-3xl font-extrabold text-slate-900 mt-1">How Rajya Krishi Banda Works</p>
             <p className="text-sm text-slate-600 mt-2">
               From harvest to settlement: direct communication without unnecessary middlemen.
             </p>
@@ -324,7 +324,7 @@ export const LandingPage: React.FC = () => {
           </div>
           <h2 className="text-2xl font-bold text-slate-900">Price Transparency & Objective Principles</h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            FarmerDirect does not artificially fix commodity rates or claim guaranteed profits. Instead, we publish dated APMC benchmarks (clearly labeled DEMO_DATA for testing), preserve negotiation history, and provide an explainable matching algorithm to foster mutual trust in Udupi and Dakshina Kannada.
+            Rajya Krishi Banda does not artificially fix commodity rates or claim guaranteed profits. Instead, we publish dated APMC benchmarks (clearly labeled DEMO_DATA for testing), preserve negotiation history, and provide an explainable matching algorithm to foster mutual trust in Udupi and Dakshina Kannada.
           </p>
         </div>
       </section>
