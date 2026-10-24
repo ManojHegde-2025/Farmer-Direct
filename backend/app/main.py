@@ -1,4 +1,4 @@
-"""FarmerDirect FastAPI Application Entry Point."""
+"""Rajya Krishi Banda FastAPI Application Entry Point."""
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -48,7 +48,7 @@ app.include_router(api_router, prefix="/api/v1")
 @app.get("/")
 async def root():
     return {
-        "name": "FarmerDirect API",
+        "name": "Rajya Krishi Banda API",
         "description": "Full-Stack Agricultural Marketplace for Udupi & Dakshina Kannada",
         "version": "1.0.0",
         "docs_url": "/docs",

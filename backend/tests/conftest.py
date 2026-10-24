@@ -1,4 +1,4 @@
-"""Pytest fixtures for FarmerDirect."""
+"""Pytest fixtures for Rajya Krishi Banda."""
 
 import asyncio
 import os

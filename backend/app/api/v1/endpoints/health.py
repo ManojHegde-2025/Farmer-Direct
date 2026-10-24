@@ -21,6 +21,6 @@ async def health_check(db: AsyncSession = Depends(get_db)):
     return {
         "status": "healthy" if db_status == "healthy" else "degraded",
         "database": db_status,
-        "service": "FarmerDirect API",
+        "service": "Rajya Krishi Banda API",
         "version": "1.0.0",
     }

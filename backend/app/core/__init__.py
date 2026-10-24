@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = "./uploads"
 
     # App metadata
-    APP_NAME: str = "FarmerDirect API"
+    APP_NAME: str = "Rajya Krishi Banda API"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = True
 
