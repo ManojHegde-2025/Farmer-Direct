@@ -23,6 +23,7 @@ import {
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
+  MessageSquare,
 } from 'lucide-react';
 
 export const BuyerDashboard: React.FC = () => {
@@ -282,6 +283,15 @@ export const BuyerDashboard: React.FC = () => {
                   </div>
 
                   <div className="flex items-center space-x-2">
+                    <Link
+                      to={`/messages?orderId=${ord.id}`}
+                      className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center space-x-1"
+                      title="Coordinate delivery & logistics"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>Message Farmer</span>
+                    </Link>
+
                     {ord.status === 'PAYMENT_PENDING' && (
                       <button
                         onClick={() => handleSimulatePayment(ord)}

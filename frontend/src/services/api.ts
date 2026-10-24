@@ -103,3 +103,11 @@ export const getUserReviews = (userId: number) => api.get(`/reviews/user/${userI
 export const raiseDispute = (data: any) => api.post('/disputes/', data);
 export const getDisputes = () => api.get('/disputes/');
 export const resolveDispute = (id: number, data: any) => api.patch(`/disputes/${id}/resolve`, data);
+
+// Conversations & Messaging API
+export const getConversations = () => api.get('/conversations/');
+export const getConversationById = (id: number) => api.get(`/conversations/${id}`);
+export const getOrCreateOrderConversation = (orderId: number) => api.post(`/conversations/order/${orderId}`);
+export const getConversationMessages = (id: number, params?: any) => api.get(`/conversations/${id}/messages`, { params });
+export const sendMessage = (id: number, data: { content: string }) => api.post(`/conversations/${id}/messages`, data);
+export const markMessagesRead = (id: number) => api.post(`/conversations/${id}/read`);

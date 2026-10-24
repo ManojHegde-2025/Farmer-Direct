@@ -189,3 +189,52 @@ export interface MatchResult {
   explanation: string;
   fulfillable_quantity: number;
 }
+
+export interface ConversationParticipant {
+  id: number;
+  full_name: string;
+  role: string;
+  district?: string;
+  business_or_farm_name?: string;
+}
+
+export interface ConversationOrderSummary {
+  id: number;
+  status: OrderStatus;
+  commodity_name: string;
+  quantity: number;
+  unit: string;
+  price_per_unit: number;
+  total_price: number;
+}
+
+export interface Message {
+  id: number;
+  conversation_id: number;
+  sender_id: number;
+  sender_name: string;
+  sender_role: string;
+  content: string;
+  is_read: boolean;
+  read_at?: string;
+  created_at: string;
+  is_mine: boolean;
+}
+
+export interface Conversation {
+  id: number;
+  order_id: number;
+  buyer: ConversationParticipant;
+  farmer: ConversationParticipant;
+  order_summary: ConversationOrderSummary;
+  last_message?: string;
+  last_message_at?: string;
+  unread_count: number;
+  is_messaging_closed: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SendMessagePayload {
+  content: string;
+}

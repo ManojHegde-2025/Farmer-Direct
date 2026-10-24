@@ -23,6 +23,9 @@ import { BuyerMatchesPage } from './pages/buyer/BuyerMatchesPage';
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 
+// Messaging Page
+import { MessagesPage } from './pages/messages/MessagesPage';
+
 // Protected Route Guard
 const ProtectedRoute: React.FC<{ children: React.ReactNode; allowedRoles?: string[] }> = ({
   children,
@@ -112,6 +115,16 @@ export const App: React.FC = () => {
             element={
               <ProtectedRoute allowedRoles={['ADMIN']}>
                 <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Private Messaging Route */}
+          <Route
+            path="/messages"
+            element={
+              <ProtectedRoute allowedRoles={['FARMER', 'BUYER', 'ADMIN']}>
+                <MessagesPage />
               </ProtectedRoute>
             }
           />

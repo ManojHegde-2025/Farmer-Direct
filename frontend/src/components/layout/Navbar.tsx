@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Sprout, ShoppingBag, ShieldCheck, UserCheck, LogOut, LogIn, Globe, LayoutDashboard } from 'lucide-react';
+import { Sprout, ShoppingBag, ShieldCheck, UserCheck, LogOut, LogIn, Globe, LayoutDashboard, MessageSquare } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -56,6 +56,16 @@ export const Navbar: React.FC = () => {
               >
                 <LayoutDashboard className="w-4 h-4 text-emerald-400" />
                 <span>{t.nav.buyerDashboard}</span>
+              </Link>
+            )}
+
+            {(user?.role === 'FARMER' || user?.role === 'BUYER') && (
+              <Link
+                to="/messages"
+                className="text-slate-300 hover:text-white transition-colors text-sm font-medium flex items-center space-x-1.5"
+              >
+                <MessageSquare className="w-4 h-4 text-emerald-400" />
+                <span>{(t.nav as any).messages || 'Messages'}</span>
               </Link>
             )}
 

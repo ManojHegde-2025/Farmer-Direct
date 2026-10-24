@@ -29,6 +29,7 @@ import {
   FileText,
   AlertCircle,
   ArrowRight,
+  MessageSquare,
 } from 'lucide-react';
 
 export const FarmerDashboard: React.FC = () => {
@@ -355,6 +356,15 @@ export const FarmerDashboard: React.FC = () => {
                   </div>
 
                   <div className="flex items-center space-x-2">
+                    <Link
+                      to={`/messages?orderId=${ord.id}`}
+                      className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center space-x-1"
+                      title="Coordinate delivery & logistics"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>Message Buyer</span>
+                    </Link>
+
                     <button
                       onClick={() => viewOrderBreakdown(ord.id)}
                       className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-200 transition flex items-center space-x-1"
