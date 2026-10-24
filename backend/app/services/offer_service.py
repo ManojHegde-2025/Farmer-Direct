@@ -17,6 +17,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.offer import Offer, OfferStatus
 from app.models.listing import Listing, ListingStatus
 from app.models.order import Order, OrderStatus, FulfilmentMethod
+from app.models.conversation import Conversation
 from app.models.user import User
 from app.services.inventory_service import reserve_stock
 
@@ -235,6 +236,16 @@ async def accept_offer(
     )
     db.add(order)
     await db.flush()
+
+    # 5. Atomically establish private transaction conversation
+    conversation = Conversation(
+        order_id=order.id,
+        buyer_id=order.buyer_id,
+        farmer_id=order.seller_id,
+    )
+    db.add(conversation)
+    await db.flush()
+
     return order
 
 

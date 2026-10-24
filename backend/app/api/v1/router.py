@@ -17,6 +17,7 @@ from app.api.v1.endpoints import (
     deliveries,
     disputes,
     reviews,
+    conversations,
     admin,
     health,
 )
@@ -34,6 +35,7 @@ api_router.include_router(reference_prices.router, prefix="/reference-prices", t
 api_router.include_router(matching.router, prefix="/matching", tags=["Matching Engine"])
 api_router.include_router(offers.router, prefix="/offers", tags=["Offers & Negotiation"])
 api_router.include_router(orders.router, prefix="/orders", tags=["Orders & Fulfillment"])
+api_router.include_router(conversations.router, prefix="/conversations", tags=["Conversations & Messaging"])
 api_router.include_router(payments.router, prefix="/payments", tags=["Payments"])
 api_router.include_router(deliveries.router, prefix="/deliveries", tags=["Logistics & Deliveries"])
 api_router.include_router(disputes.router, prefix="/disputes", tags=["Disputes"])

@@ -92,6 +92,7 @@ class Order(Base):
     commodity: Mapped["Commodity"] = relationship("Commodity", lazy="selectin")
     payments: Mapped[list["Payment"]] = relationship("Payment", back_populates="order", lazy="selectin")
     delivery: Mapped["Delivery | None"] = relationship("Delivery", back_populates="order", uselist=False, lazy="selectin")
+    conversation: Mapped["Conversation | None"] = relationship("Conversation", back_populates="order", uselist=False, lazy="selectin")
     items: Mapped[list["OrderItem"]] = relationship("OrderItem", back_populates="order", lazy="selectin")
 
     __table_args__ = (

@@ -15,6 +15,7 @@ from app.models.dispute import Dispute, DisputeCategory, DisputeStatus
 from app.models.review import Review
 from app.models.notification import Notification
 from app.models.audit_log import AuditLog
+from app.models.conversation import Conversation, Message
 
 __all__ = [
     "User", "UserRole",
@@ -32,4 +33,6 @@ __all__ = [
     "Review",
     "Notification",
     "AuditLog",
+    "Conversation",
+    "Message",
 ]
