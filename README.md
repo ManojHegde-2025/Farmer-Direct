@@ -1,4 +1,4 @@
-# FarmerDirect 🌾
+# Rajya Krishi Banda 🌾
 
 **Direct Farm-to-Buyer Agricultural Marketplace for Udupi & Dakshina Kannada**
 
@@ -6,7 +6,7 @@ A full-stack digital marketplace connecting verified farmers directly with buyer
 
 ## Overview
 
-FarmerDirect enables farmers to list their produce, set asking prices, receive offers, and negotiate directly with buyers — reducing avoidable intermediaries and improving price transparency.
+Rajya Krishi Banda enables farmers to list their produce, set asking prices, receive offers, and negotiate directly with buyers — reducing avoidable intermediaries and improving price transparency.
 
 ### Supported Commodities
 - Arecanut (ಅಡಿಕೆ)
